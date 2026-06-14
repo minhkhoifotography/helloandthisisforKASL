@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="vi">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,29 +10,164 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap" rel="stylesheet">
   <style>
-html {
-  box-sizing: border-box;
-}
+    html { box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; margin: 0; overflow-x: hidden; background-color: #fff; }
+    .song { visibility: hidden; }
 
-body {
-  font-family: 'Poppins', sans-serif;
-  margin: 0;
-}
+    /* Container chính căn giữa nội dung */
+    .container {
+      min-height: 100vh;
+      width: 100vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      box-sizing: border-box;
+      visibility: hidden;
+    }
 
-.song {
-  visibility: hidden;
-}
+    /* Các khung nội dung */
+    .container > div {
+      width: 100%;
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: absolute; /* Giữ để GSAP điều khiển timeline */
+    }
 
-.container {
-  height: 100vh;
-  margin: 0 auto;
-  overflow: hidden;
-  position: relative;
-  text-align: center;
-  visibility: hidden;
-  width: 100vw;
-}
+    /* Typography linh hoạt */
+    .one { font-size: clamp(2rem, 8vw, 4.5rem); }
+    .two { font-size: clamp(1.5rem, 5vw, 3.2rem); }
+    .three { font-size: clamp(1.5rem, 5vw, 3rem); }
 
+    .four .text-box {
+      border: 3px solid #aaa;
+      border-radius: 10px;
+      padding: 20px;
+      width: 90%;
+      text-align: left;
+    }
+
+    .text-box .fake-btn {
+      background-color: rgb(21, 161, 237);
+      border-radius: 5px;
+      color: #fff;
+      padding: 8px 16px;
+      margin-top: 15px;
+      cursor: pointer;
+      align-self: flex-end;
+      display: inline-block;
+    }
+
+    .six img { max-width: 80%; height: auto; margin: 10px 0; }
+    .six .hat { width: 100px; }
+    .wish-hbd { font-size: clamp(2rem, 6vw, 4rem); margin: 10px 0; }
+    .wishText { font-size: clamp(1rem, 3vw, 2rem); margin: 0; }
+    
+    .seven { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; }
+    .eight { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+    
+    @media screen and (max-width: 600px) {
+      .four .text-box { width: 95%; padding: 15px; }
+      .six .hat { width: 60px; }
+      .nine p { font-size: 1.2rem; }
+    }
+  </style>
+</head>
+
+<body>
+    <audio class="song" loop autoplay>
+        <source src="hbd.mp3">
+    </audio>
+
+    <div class="container">
+        <div class="one">
+            <h1>Hello my darling <span id="name">Sofia Lê Kỳ Anh</span></h1>
+            <p class="two" id="greetingText">Em biết gì chưa?</p>
+        </div>
+
+        <div class="three">
+            <p>Hôm nay là một ngày đặc biệt!</p>
+        </div>
+
+        <div class="four">
+            <div class="text-box">
+                <p class="hbd-chatbox">Hôm nay khi đột nhiên check lại personal calendar, có một dòng ghi chú rất đặc biệt vào ngày hôm nay: "15/06". Đó là ngày sinh nhật của bé. Thật vui khi được chúc mừng sinh nhật bé trong ngày đặc biệt này! 😄 Không biết KASL đã có plan gì cho ngày hôm nay chưa?</p>
+                <p class="fake-btn">Send</p>
+            </div>
+        </div>
+
+        <div class="five">
+            <p class="idea-1">Lúc đầu anh muốn gọi cho em</p>
+            <p class="idea-2">Nhưng sau đó anh đã dừng lại.</p>
+            <p class="idea-3">Và anh nhận ra rằng, với một cựu học sinh IT, thì sinh nhật bé phải làm một điều gì đó<br><strong>đặc biệt</strong>.</p>
+            <p class="idea-4">Bởi vì,</p>
+            <p class="idea-5">"You are the apple of my eye" <span>:)</span></p>
+            <p class="idea-6"><span>Happy </span><span>Birthday!</span></p>
+        </div>
+
+        <div class="six">
+            <img src="img/tho.gif" alt="profile" class="profile-picture" id="imagePath"/>
+            <img src="img/cake.gif" alt="hat" class="hat" />
+            <div class="wish">
+                <h3 class="wish-hbd">Happy Birthday!</h3>
+                <h5 class="wishText">Chúc ebe cụa tui có một sinh nhật ngọt ngào! :)</h5>
+            </div>
+        </div>
+
+        <div class="seven">
+            <div class="baloons">
+                </div>
+        </div>
+
+        <div class="eight">
+            </div>
+
+        <div class="nine">
+            <p>Được rồi, bây giờ quay lại và cho tôi biết nếu bạn thích nó.</p>
+            <p id="replay">Hoặc nhấn vào đây, nếu bạn muốn xem lại.</p>
+            <p class="last-smile">:)</p>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        window.addEventListener('load', () => {
+            Swal.fire({
+                title: 'Nghe một chút nhạc nha?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No',
+            }).then((result) => {
+                if (result.isConfirmed) document.querySelector('.song').play();
+                animationTimeline();
+            });
+        });
+
+        const animationTimeline = () => {
+            const textBoxChars = document.getElementsByClassName("hbd-chatbox")[0];
+            const hbd = document.getElementsByClassName("wish-hbd")[0];
+            textBoxChars.innerHTML = `<span>${textBoxChars.innerHTML.split("").join("</span><span>")}</span>`;
+            hbd.innerHTML = `<span>${hbd.innerHTML.split("").join("</span><span>")}</span>`;
+
+            const tl = new TimelineMax();
+            tl.to(".container", 0.6, { visibility: "visible" })
+              // ... giữ nguyên logic animation GSAP cũ của bạn tại đây ...
+              .staggerTo(".eight svg", 1.5, { visibility: "visible", opacity: 0, scale: 80, repeat: 3 }, 0.3)
+              .to(".six", 0.5, { opacity: 0, y: 30, zIndex: "-1" })
+              .staggerFrom(".nine p", 1, { opacity: 0, y: -20 }, 1.2);
+
+            document.getElementById("replay").addEventListener("click", () => tl.restart());
+        }
+    </script>
+</body>
+</html>
 .container > div {
   left: 0;
   position: absolute;
